@@ -49,7 +49,7 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question("Enter input file path: ", (inputFile) => {
+rl.question("Enter input file path (e.g. sample_inputs/sample.txt): ", (inputFile) => {
     const outputFile = "output.txt"; 
     const uniqueInt = new UniqueInt();
     try {

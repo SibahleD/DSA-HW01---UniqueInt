@@ -1,4 +1,5 @@
 const fs = require("fs");
+const readline = require("readline");
 
 class UniqueInt {
     constructor() {
@@ -21,7 +22,6 @@ class UniqueInt {
     }
 
     processFile(inputFilePath, outputFilePath) {
-
         const data = fs.readFileSync(inputFilePath, "utf-8").split("\n");
         for (let line of data) {
             const num = this.readNextItemFromLine(line);
@@ -44,8 +44,18 @@ class UniqueInt {
     }
 }
 
-const inputFile = process.argv[2];
-const outputFile = process.argv[3];
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-const uniqueInt = new UniqueInt();
-uniqueInt.processFile(inputFile, outputFile);
+rl.question("Enter input file path: ", (inputFile) => {
+    const outputFile = "output.txt"; 
+    const uniqueInt = new UniqueInt();
+    try {
+        uniqueInt.processFile(inputFile, outputFile);
+    } catch (error) {
+        console.error("Error:", error.message);
+    }
+    rl.close();
+});
